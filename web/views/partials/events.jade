@@ -1,0 +1,13 @@
+.container
+	.panel.panel-default
+		.panel-title Events
+		.panel-body
+			table.table
+				tr
+					th API_KEY
+					th UserID
+					th Timestamp
+				tr(ng-repeat="m in events")
+					td {{ m.apiKey }}
+					td {{ m.userID }}
+					td {{ m.timestamp | date :'medium'}}

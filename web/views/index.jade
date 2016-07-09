@@ -1,0 +1,53 @@
+html
+	head
+		title PEAK
+		meta(http-equiv="Content-Type",content="text/html; charset=utf-8")
+
+		// Style files
+		link(rel="stylesheet",href="/css/theme.css")
+
+		// Font awesome for icons
+		link(rel="stylesheet",href="/vendor/font-awesome.css")
+
+		// The angular dependencies
+		script(src="/vendor/angular.js")
+	
+		// Rickshaw - Time series Plots
+		link(href="/vendor/rickshaw/rickshaw.css",rel="stylesheet")
+		script(src="/vendor/d3.js")
+		script(src="/vendor/rickshaw/rickshaw.js")
+		script(src="/vendor/rickshaw/angular-rickshaw.js")
+
+		// UI Router
+		script(src="/vendor/angular-ui-router.js")
+
+		// UI Bootstrap
+		script(src="/vendor/angular-bootstrap/ui-bootstrap.js")
+		script(src="/vendor/angular-bootstrap/ui-bootstrap-tpls.js")
+
+		script(src="/vendor/plotly-latest.min.js")
+		script(src="/vendor/angular-plotly.js")
+		
+		// Application Entry point
+		script(src="/js/main.js")
+
+		// Controllers, Directives: TODO: Seperate them
+		script(src="/js/controllers.js")
+		script(src="/js/directives.js")
+
+	body(ng-app="MyApp")
+		nav.navbar.navbar-inverse
+			.container
+				.navbar-header
+					a.navbar-brand(href="#/home")
+						b PEAK
+				ul.nav.navbar-nav
+					li
+						a(href="#/events")
+							i.fa.fa-cloud
+							b  Events
+					li
+						a(href="#/monitor")
+							i.fa.fa-eye
+							b Monitor		
+		#content(ui-view="")
