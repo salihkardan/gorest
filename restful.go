@@ -80,7 +80,7 @@ func main() {
 	r.GET("/partials/*filepath", jade.RenderJadeFromBasePath(path.Join(StaticFiles, "/views/partials")))
 
 	r.GET("/api/events", cassandra.GetEventsFromCassandra())
-	r.GET("/api/responses", cassandra.GetResponseTimesFromCassandra())
+	r.GET("/api/requests", cassandra.GetResponseTimesFromCassandra())
 
 	api := r.Group("/api", TokenAuthMiddleware(apiKeyMap))
 	{

@@ -1,0 +1,14 @@
+.container
+	.panel.panel-default
+		.panel-title Requests
+		.panel-body
+			table.table
+				tr
+					th API_KEY
+					th Response Time
+					th Timestamp
+				tr(ng-repeat="m in requests")
+					td {{ m.APIKey }}
+					td {{ m.Duration}}
+					td {{ m.Timestamp | date :'medium'}}
+          

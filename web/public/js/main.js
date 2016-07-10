@@ -1,12 +1,24 @@
 var app = angular.module("MyApp", [
 	'ui.router',
 	'ui.bootstrap',
-	'angular-rickshaw',
-	'graphPlotter'
+	'chart.js',
+	'graphPlotter',
+	'tc.chartjs'
 ]);
 
-app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $logProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $logProvider, ChartJsProvider) {
 	$logProvider.debugEnabled(false);
+
+	ChartJsProvider.setOptions({
+		 colours: ['#97BBCD', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
+		 responsive: true
+	 });
+
+	// Configure all doughnut charts
+	ChartJsProvider.setOptions('Doughnut', {
+		 animateScale: true
+	 });
+
 	// Routes and states
 	$urlRouterProvider.otherwise("/events");
 	$stateProvider
@@ -14,6 +26,11 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $logProvi
 			url: "/events",
 			templateUrl: "partials/events.html",
 			controller: "EventsController",
+		})
+		.state('requests', {
+			url: "/requests",
+			templateUrl: "partials/requests.html",
+			controller: "RequestController",
 		})
 		.state('monitor', {
 			url: "/monitor",
@@ -46,7 +63,7 @@ app.run(function($rootScope, $location, $state) {
 	$rootScope.$on('$stateChangeStart',
 		function(event, toState, toParams, fromState, fromParams) {
 			// Check tostate
-        var whitelist  = ["signup", "login"];
+      var whitelist  = ["signup", "login"];
 			if (!$rootScope.token) {
 				if ( !whitelist.indexOf(toState)){
 					$state.go("events")

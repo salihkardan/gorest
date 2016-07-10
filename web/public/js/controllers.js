@@ -7,57 +7,59 @@ app.controller("EventsController", function($scope, $http) {
 	});
 });
 
-app.controller("MonitorController", function($scope, $http) {
+app.controller("RequestController", function($scope, $http) {
+	$scope.requests = [];
+	$http.get("/api/requests").then(function success(resp) {
+		$scope.requests = resp.data;
+		// console.log( resp.data )
+	});
+});
 
-	function timeConverter(UNIX_timestamp){
-	  var a = new Date(UNIX_timestamp);
-	  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-	  var year = a.getFullYear();
-	  var month = months[a.getMonth()];
-	  var date = a.getDate();
-	  var hour = a.getHours();
-	  var min = a.getMinutes();
-	  var sec = a.getSeconds();
-	  // var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-		var time = hour + ':' + min + ':' + sec ;
-	  return time;
+
+app.controller("MonitorController", function($scope, $http) {
+	// todo: may be a lot better
+  function count(respArray){
+	  var a = 0, b = 0, c = 0, d = 0, e = 0, f = 0;
+    var result = [];
+		for (var j = 0; j < respArray.length; j++) {
+			if ( respArray[j].Duration < 1 ){
+				a++;
+			} else if ( respArray[j].Duration > 1 && respArray[j].Duration < 5){
+				b++;
+			} else if ( respArray[j].Duration > 5 && respArray[j].Duration < 10){
+				c++;
+			} else if ( respArray[j].Duration > 10 && respArray[j].Duration < 20){
+				d++;
+			} else if ( respArray[j].Duration > 20 && respArray[j].Duration < 50){
+				e++;
+			} else if ( respArray[j].Duration > 50){
+				f++;
+			}
+		}
+		result.push(a,b,c,d,e,f);
+		return result;
 	}
 
-	$scope.resp = [];
-	var myArray = [];
-	var timeArray = [];
+	$http.get("/api/requests").then(function success(resp) {
+		var dataArray = [];
+		if ( resp.data != null ){
+			$scope.resp = resp.data;
+			dataArray = count($scope.resp)
+		}
 
-	var myArray2 = [];
-	var timeArray2 = [];
-
-
-	$http.get("/api/responses").then(function success(resp) {
-		$scope.resp = resp.data;
-	  for(var j=0; j<$scope.resp.length; j++) {
-				// console.log($scope.resp[j])
-				if ( $scope.resp[j].APIKey == "test-api-key"){
-					myArray2.push($scope.resp[j].Duration);
-					timeArray2.push(timeConverter($scope.resp[j].Timestamp))
-				} else {
-					myArray.push($scope.resp[j].Duration);
-					timeArray.push(timeConverter($scope.resp[j].Timestamp))
-				}
-
-	  }
-		var trace1 = {
-			x: timeArray,
-			y: myArray,
-				type: 'scatter',
-				name: "def"
-		};
-
-		var trace2 = {
-				x: timeArray2,
-				y: myArray2,
-				type: 'scatter',
-				name: "abc"
-		};
-		$scope.graphPlots = [trace1, trace2];
+		// Chart.js Data
+		$scope.data = {
+	 		 labels: ['<1ms', '1-5ms', '5-10ms', '10-20ms', '20-50ms', '50-100ms'],
+	 		 datasets: [
+	 			 {
+	 				 label: 'Number of requests',
+	 				 fillColor: 'rgba(220,220,220,0.5)',
+	 				 strokeColor: 'rgba(220,220,220,0.8)',
+	 				 highlightFill: 'rgba(220,220,220,0.75)',
+	 				 highlightStroke: 'rgba(220,220,220,1)',
+					 data: dataArray
+	 			 }
+	 		 ]
+	 	 };
 	});
-
 });
