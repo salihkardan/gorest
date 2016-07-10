@@ -1,17 +1,17 @@
-How-To
+**How-To**
 
 To run webserver, you need to run `go run restful.go` command. It wil start webserver, please go to `localhost:8080`.
 
 I have created tabs on main UI:
  * Events - shows events saved in Cassandra
  * Monitor - shows number of request according to their response timestamp
- * Responses - shows saved responses with their response time
+ * Responses - shows saved responses with their response times
 
-For database, I have chosen Cassandra and use 2.X version of it. There is a file under root directory of project which contains
+For database, I have chosen Cassandra and used 2.X version of it. There is a file under root directory of project which contains
 table schema of Cassandra. To create those tables, you need to run `cqlsh -f db.cql` command.
 
 
-Assumptions:
+**Notes**
 
 1) I assumed coming requests will be in JSON format. Here is a example request sample I tested the project:
 
@@ -20,3 +20,13 @@ Assumptions:
           "userID": "'"$userId"'",
           "timestamp": '$time'
  	    }' "http://localhost:8080/api/endpoint"
+
+  Note: There is "run.sh" script for creating sample http requests for testing purpose.
+
+2) I have defined some sample api keys in apikey.txt file. While starting webserver, I load contents of that file, used those predefined api keys during validation of users.
+
+3) I have use glide as dependency manager (glide.yaml), to install dependencies run `glide update` command. To install glide refer here : https://github.com/Masterminds/glide
+
+4) I have used jade template engine to create html pages: http://jade-lang.com/
+
+5) All front end related codes under web/ folder. 
