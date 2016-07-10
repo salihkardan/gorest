@@ -11,31 +11,7 @@ import (
 	"github.com/gocql/gocql"
 )
 
-// CREATE KEYSPACE Peak
-//   WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };
-// API_KEY: API key for each client application. You will need to group events based on this API key.
-// USER_ID: Numeric ID of the user.
-// TIMESTAMP: Unix timestamp of the event.
-
-// CREATE TABLE Peak.events (
-//   api_key text,
-//   user_id text,
-//   timestamp timestamp,
-//   PRIMARY KEY (api_key, user_id, timestamp)
-// )
-// WITH CLUSTERING ORDER BY (user_id ASC, timestamp ASC);
-// //
-// CREATE TABLE Peak.responses (
-//   api_key text,
-//   response_time int,
-// 	timestamp timestamp,
-//   PRIMARY KEY (api_key, timestamp)
-// )
-// WITH CLUSTERING ORDER BY (timestamp ASC);
-
-// INSERT INTO events (api_key, user_id, timestamp ) VALUES('test-api-key', 'ahmet', 131231212331 );
-
-// Event is a psuedo structure
+// Event struct to bind objects
 type Event struct {
 	APIKey    string `form:"apiKey" json:"apiKey" binding:"required"`
 	UserID    string `form:"userID" json:"userID" binding:"required"`
@@ -43,7 +19,7 @@ type Event struct {
 	Duration  int64
 }
 
-// Response is
+// Response struct to bind objects
 type Response struct {
 	APIKey    string
 	Duration  int64
@@ -132,7 +108,7 @@ func SaveEventsToCassandra() gin.HandlerFunc {
 	}
 }
 
-// SaveRequestToCassandra save
+// SaveRequestToCassandra save reqessts to Cassandra
 func SaveRequestToCassandra(session *gocql.Session, apiKey string, temp int64) {
 	if err := session.Query(`INSERT INTO responses (api_key, response_time, timestamp) VALUES(?, ?, ?)`,
 		apiKey, temp, time.Now()).Exec(); err != nil {
