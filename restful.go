@@ -40,7 +40,6 @@ func RespondWithError(code int, message string, c *gin.Context) {
 //TokenAuthMiddleware apiKey authentaication
 func TokenAuthMiddleware(apiKeyMap map[string]bool) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		log.Println(apiKeyMap)
 		var json cassandra.Event
 		if c.BindJSON(&json) == nil {
 			if _, ok := apiKeyMap[json.APIKey]; ok {

@@ -25,7 +25,7 @@ table schema of Cassandra. To create those tables, you need to run `cqlsh -f db.
 
 2) I have defined some sample api keys in apikey.txt file. While starting webserver, I load contents of that file, used those predefined api keys during validation of users.
 
-3) I have use glide as dependency manager (glide.yaml), to install dependencies run `glide update` command. To install glide refer here : https://github.com/Masterminds/glide
+3) I have use glide as dependency manager (glide.yaml), to install dependencies run `glide install` command. To install glide refer here : https://github.com/Masterminds/glide
 
 4) I have used jade template engine to create html pages: http://jade-lang.com/
 
