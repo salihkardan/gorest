@@ -29,4 +29,4 @@ table schema of Cassandra. To create those tables, you need to run `cqlsh -f db.
 
 4) I have used jade template engine to create html pages: http://jade-lang.com/
 
-5) All front end related codes under web/ folder. 
+5) All front end related codes under web/ folder.

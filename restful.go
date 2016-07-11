@@ -24,7 +24,6 @@ func loadAPIKeys() map[string]bool {
 	}
 	lines := strings.Split(string(content), "\n")
 	for j := 0; j < len(lines); j++ {
-		fmt.Println(lines[j])
 		apiKeyMap[lines[j]] = true
 	}
 	return apiKeyMap
