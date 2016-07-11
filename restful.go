@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	cassandra "gorest/cassandra"
-	jade "gorest/jade"
+	cassandra "github.com/gorest/cassandra"
+	jade "github.com/gorest/jade"
 
 	"github.com/gin-gonic/gin"
 )
