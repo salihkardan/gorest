@@ -1,3 +1,6 @@
+
+https://circleci.com/gh/salihkardan/gorest/tree/master.svg?style=shield&circle-token=:f5ef2ac0205609236599e34dba8aa957e3e12912
+
 **How-To**
 
 To run webserver, you need to run `go run restful.go` command. It wil start webserver, please go to `localhost:8080`.
