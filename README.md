@@ -1,5 +1,5 @@
 
-https://circleci.com/gh/salihkardan/gorest/tree/master.svg?style=shield&circle-token=:f5ef2ac0205609236599e34dba8aa957e3e12912
+https://circleci.com/gh/salihkardan/gorest/tree/master.svg?style=shield&circle-token=f5ef2ac0205609236599e34dba8aa957e3e12912
 
 **How-To**
 
