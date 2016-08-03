@@ -1,4 +1,4 @@
-[![CircleCI Build Status](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield)] (https://circleci.com/gh/salihkardan/gorest/tree/master) 
+[![CircleCI](https://circleci.com/gh/salihkardan/gorest.svg?style=svg)](https://circleci.com/gh/salihkardan/gorest)
 
 **How-To**
 
