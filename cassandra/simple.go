@@ -1,11 +1,6 @@
 package cassandra
 
-import (
-	"fmt"
-
-	"github.com/gin-gonic/gin"
-	"github.com/gocql/gocql"
-)
+import "github.com/gin-gonic/gin"
 
 // Event struct to bind objects
 type Event struct {
@@ -23,7 +18,6 @@ type Response struct {
 }
 
 var keyspace = "peak"
-var cluster = gocql.NewCluster("localhost")
 
 // GetEventsFromCassandra get evetns form Cassandra
 func GetEventsFromCassandra() gin.HandlerFunc {
@@ -44,9 +38,4 @@ func SaveEventsToCassandra() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.JSON(200, "Event successfully saved...")
 	}
-}
-
-// SaveRequestToCassandra save reqessts to Cassandra
-func SaveRequestToCassandra(session *gocql.Session, apiKey string, temp int64) {
-	fmt.Print("Hello")
 }
