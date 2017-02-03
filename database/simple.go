@@ -19,8 +19,8 @@ type Response struct {
 
 var keyspace = "peak"
 
-// GetEventsFromCassandra get evetns form Cassandra
-func GetEventsFromCassandra() gin.HandlerFunc {
+// GetEvents get evetns form Cassandra
+func GetEvents() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var events []Event
 		var event Event
@@ -34,8 +34,8 @@ func GetEventsFromCassandra() gin.HandlerFunc {
 	}
 }
 
-// GetResponseTimesFromCassandra get response times form Cassandra
-func GetResponseTimesFromCassandra() gin.HandlerFunc {
+// GetResponseTimes get response times form Cassandra
+func GetResponseTimes() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var responses []Response
 		var response Response
@@ -49,8 +49,8 @@ func GetResponseTimesFromCassandra() gin.HandlerFunc {
 	}
 }
 
-// SaveEventsToCassandra saves events to Cassandra
-func SaveEventsToCassandra() gin.HandlerFunc {
+// SaveEvents saves events to Cassandra
+func SaveEvents() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.JSON(200, "Event successfully saved...")
 	}
