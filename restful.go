@@ -65,13 +65,14 @@ func main() {
 	r := gin.New()
 	r.Use(gin.Recovery())
 	// logger := gin.Logger()
-	gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.DebugMode)
 
 	// Static files mapping
 	r.Static("/css", path.Join(StaticFiles, "/public/css"))
 	r.Static("/fonts", path.Join(StaticFiles, "/public/fonts"))
 	r.Static("/js", path.Join(StaticFiles, "/public/js"))
 	r.Static("/vendor", path.Join(StaticFiles, "/public/vendor"))
+	r.Static("/images", path.Join(StaticFiles, "/public/images"))
 
 	// Jade renderings
 	r.GET("/", jade.RenderJadeFromDirectPath(path.Join(StaticFiles, "/views"), "index.html"))

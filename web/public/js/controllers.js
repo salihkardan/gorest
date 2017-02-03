@@ -15,7 +15,6 @@ app.controller("RequestController", function($scope, $http) {
 	});
 });
 
-
 app.controller("MonitorController", function($scope, $http) {
 	// todo: may be a lot better
   function count(respArray){

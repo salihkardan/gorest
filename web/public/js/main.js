@@ -22,6 +22,10 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $logProvi
 	// Routes and states
 	$urlRouterProvider.otherwise("/events");
 	$stateProvider
+		.state('home', {
+			url: "/home",
+			templateUrl: "partials/home.html",
+		})
 		.state('events', {
 			url: "/events",
 			templateUrl: "partials/events.html",

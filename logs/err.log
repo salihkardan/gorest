@@ -1,0 +1,21 @@
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /css/*filepath            --> github.com/salihkardan/gorest/vendor/github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (2 handlers)
+[GIN-debug] HEAD   /css/*filepath            --> github.com/salihkardan/gorest/vendor/github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (2 handlers)
+[GIN-debug] GET    /fonts/*filepath          --> github.com/salihkardan/gorest/vendor/github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (2 handlers)
+[GIN-debug] HEAD   /fonts/*filepath          --> github.com/salihkardan/gorest/vendor/github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (2 handlers)
+[GIN-debug] GET    /js/*filepath             --> github.com/salihkardan/gorest/vendor/github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (2 handlers)
+[GIN-debug] HEAD   /js/*filepath             --> github.com/salihkardan/gorest/vendor/github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (2 handlers)
+[GIN-debug] GET    /vendor/*filepath         --> github.com/salihkardan/gorest/vendor/github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (2 handlers)
+[GIN-debug] HEAD   /vendor/*filepath         --> github.com/salihkardan/gorest/vendor/github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (2 handlers)
+[GIN-debug] GET    /images/*filepath         --> github.com/salihkardan/gorest/vendor/github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (2 handlers)
+[GIN-debug] HEAD   /images/*filepath         --> github.com/salihkardan/gorest/vendor/github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (2 handlers)
+[GIN-debug] GET    /                         --> github.com/salihkardan/gorest/jade.RenderJadeFromDirectPath.func1 (2 handlers)
+[GIN-debug] GET    /partials/*filepath       --> github.com/salihkardan/gorest/jade.RenderJadeFromBasePath.func1 (2 handlers)
+[GIN-debug] GET    /api/events               --> github.com/salihkardan/gorest/cassandra.GetEventsFromCassandra.func1 (2 handlers)
+[GIN-debug] GET    /api/requests             --> github.com/salihkardan/gorest/cassandra.GetResponseTimesFromCassandra.func1 (2 handlers)
+[GIN-debug] POST   /api/endpoint             --> github.com/salihkardan/gorest/cassandra.SaveEventsToCassandra.func1 (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [ERROR] listen tcp :8080: bind: address already in use
