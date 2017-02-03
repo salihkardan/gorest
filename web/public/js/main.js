@@ -25,6 +25,7 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $logProvi
 		.state('home', {
 			url: "/home",
 			templateUrl: "partials/home.html",
+            controller: "HomeController",
 		})
 		.state('events', {
 			url: "/events",

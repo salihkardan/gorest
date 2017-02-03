@@ -1,6 +1,13 @@
-package cassandra
+package database
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"gopkg.in/redis.v5"
+	"fmt"
+	"github.com/op/go-logging"
+	"time"
+	"strconv"
+)
 
 // Event struct to bind objects
 type Event struct {
@@ -18,18 +25,37 @@ type Response struct {
 }
 
 var keyspace = "peak"
+var log = logging.MustGetLogger("example")
+var redisCli = redis.NewClient(&redis.Options{
+	Addr:     "localhost:6379",
+	Password: "", // no password set
+	DB:       0,  // use default DB
+})
+
+func ExampleRedisSetGet() {
+	redisCli.Set("test", "salih2", 0);
+	log.Info("setting key")
+	value, _ := redisCli.Get("test").Result();
+	log.Info(value);
+	pong, _ := redisCli.Ping().Result()
+	fmt.Println(pong)
+}
 
 // GetEvents get evetns form Cassandra
 func GetEvents() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var events []Event
 		var event Event
-		event.APIKey = "test"
-		event.UserID = "1"
-		event.Duration = 121
-		event.Timestamp = 123123
-		events = append(events, event)
 
+		keys := redisCli.Keys("*").Val();
+
+		for i := 0; i < len(keys); i++ {
+			event.APIKey = keys[i];
+			event.UserID = "1"
+			event.Duration = 121
+			event.Timestamp = time.Now().Unix();
+			events = append(events, event)
+		}
 		c.JSON(200, events)
 	}
 }
@@ -50,8 +76,33 @@ func GetResponseTimes() gin.HandlerFunc {
 }
 
 // SaveEvents saves events to Cassandra
-func SaveEvents() gin.HandlerFunc {
+func Save(apiKey string) {
+	currentTime := strconv.FormatInt(time.Now().UnixNano(), 10)
+	log.Info("Time", currentTime)
+	log.Info("ApiKey", apiKey)
+	redisCli.Set(currentTime+"_"+apiKey, apiKey, 0);
+	log.Info("Saving key : ", currentTime+"_test")
+}
+
+func SaveEvents(apiKey string) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.JSON(200, "Event successfully saved...")
+		log.Info(c)
+		go Save(apiKey)
 	}
 }
+
+func SaveIncomingRequest() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		type IncomingRequest struct {
+			Visitor       string `form:"visitor" 		json:"visitor" 			binding:"required"`
+			Ip            string `form:"ip" 		json:"ip" 			binding:"required"`
+		}
+		var json IncomingRequest
+		if c.Bind(&json) == nil {
+			go Save(json.Ip)
+		} else {
+			c.String(400, "failedd")
+		}
+	}
+}
+

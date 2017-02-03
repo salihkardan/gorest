@@ -15,6 +15,16 @@ app.controller("RequestController", function($scope, $http) {
 	});
 });
 
+app.controller("HomeController", function($scope, $http) {
+    $http.post("/incoming", {
+        client: "visitor",
+		ip: window.location.host
+    }).then(function success(resp) {
+        console.log( resp.data )
+    });
+});
+
+
 app.controller("MonitorController", function($scope, $http) {
 	// todo: may be a lot better
   function count(respArray){

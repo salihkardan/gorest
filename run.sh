@@ -21,6 +21,6 @@ curl -X POST -H "Cache-Control: no-cache" -d '{
         "timestamp": '$time' 
 }' "http://localhost:8080/api/endpoint"
 
-sleep 1
+#sleep 1
 
 done

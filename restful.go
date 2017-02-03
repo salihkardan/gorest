@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/salihkardan/gorest/cassandra"
+	"github.com/salihkardan/gorest/database"
 	jade "github.com/salihkardan/gorest/jade"
 
 	"github.com/gin-gonic/gin"
@@ -40,7 +40,7 @@ func RespondWithError(code int, message string, c *gin.Context) {
 //TokenAuthMiddleware apiKey authentaication
 func TokenAuthMiddleware(apiKeyMap map[string]bool) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var json cassandra.Event
+		var json database.Event
 		if c.BindJSON(&json) == nil {
 			if _, ok := apiKeyMap[json.APIKey]; ok {
 				c.Set("event", json)
@@ -57,6 +57,10 @@ func TokenAuthMiddleware(apiKeyMap map[string]bool) gin.HandlerFunc {
 }
 
 func main() {
+
+	database.ExampleRedisSetGet();
+
+
 	apiKeyMap := loadAPIKeys()
 
 	port := 8080
@@ -78,12 +82,14 @@ func main() {
 	r.GET("/", jade.RenderJadeFromDirectPath(path.Join(StaticFiles, "/views"), "index.html"))
 	r.GET("/partials/*filepath", jade.RenderJadeFromBasePath(path.Join(StaticFiles, "/views/partials")))
 
-	r.GET("/api/events", cassandra.GetEventsFromCassandra())
-	r.GET("/api/requests", cassandra.GetResponseTimesFromCassandra())
+	r.GET("/api/events", database.GetEvents())
+	r.GET("/api/requests", database.GetResponseTimes())
+
+	r.POST("/incoming", database.SaveIncomingRequest())
 
 	api := r.Group("/api", TokenAuthMiddleware(apiKeyMap))
 	{
-		api.POST("/endpoint", cassandra.SaveEventsToCassandra())
+		api.POST("/endpoint", database.SaveEvents("test-api-key"))
 	}
 
 	r.Run(":" + strconv.Itoa(port))
