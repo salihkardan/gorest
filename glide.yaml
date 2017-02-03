@@ -1,4 +1,4 @@
-package: gorest
+package: github.com/salihkardan/gorest
 import:
 - package: gopkg.in/yaml.v2
 - package: gopkg.in/redis.v4

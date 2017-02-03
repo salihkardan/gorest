@@ -1,0 +1,1 @@
+go build restful.go

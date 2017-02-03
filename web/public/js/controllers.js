@@ -11,7 +11,7 @@ app.controller("RequestController", function($scope, $http) {
 	$scope.requests = [];
 	$http.get("/api/requests").then(function success(resp) {
 		$scope.requests = resp.data;
-		// console.log( resp.data )
+		console.log( resp.data )
 	});
 });
 
