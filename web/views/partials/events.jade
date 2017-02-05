@@ -4,10 +4,8 @@
 		.panel-body
 			table.table
 				tr
-					th API_KEY
-					th UserID
-					th Timestamp
+					th Visit Time
+					th Ip
 				tr(ng-repeat="m in events")
-					td {{ m.apiKey }}
+					td {{ m.apiKey | date :'medium'}}
 					td {{ m.userID }}
-					td {{ m.timestamp | date :'medium'}}

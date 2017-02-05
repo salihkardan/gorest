@@ -57,10 +57,6 @@ func TokenAuthMiddleware(apiKeyMap map[string]bool) gin.HandlerFunc {
 }
 
 func main() {
-
-	database.ExampleRedisSetGet();
-
-
 	apiKeyMap := loadAPIKeys()
 
 	port := 8080

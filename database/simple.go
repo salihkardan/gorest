@@ -3,7 +3,6 @@ package database
 import (
 	"github.com/gin-gonic/gin"
 	"gopkg.in/redis.v5"
-	"fmt"
 	"github.com/op/go-logging"
 	"time"
 	"strconv"
@@ -13,8 +12,10 @@ import (
 type Event struct {
 	APIKey    string `form:"apiKey" json:"apiKey" binding:"required"`
 	UserID    string `form:"userID" json:"userID" binding:"required"`
-	Timestamp int64  `form:"timestamp" json:"timestamp" binding:"required"`
-	Duration  int64
+}
+
+type IncomingRequest struct {
+	Ip            string `form:"ip" json:"ip" binding:"required"`
 }
 
 // Response struct to bind objects
@@ -32,35 +33,23 @@ var redisCli = redis.NewClient(&redis.Options{
 	DB:       0,  // use default DB
 })
 
-func ExampleRedisSetGet() {
-	redisCli.Set("test", "salih2", 0);
-	log.Info("setting key")
-	value, _ := redisCli.Get("test").Result();
-	log.Info(value);
-	pong, _ := redisCli.Ping().Result()
-	fmt.Println(pong)
-}
-
 // GetEvents get evetns form Cassandra
 func GetEvents() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var events []Event
 		var event Event
-
 		keys := redisCli.Keys("*").Val();
-
 		for i := 0; i < len(keys); i++ {
+			val := redisCli.Get(keys[i]).Val();
 			event.APIKey = keys[i];
-			event.UserID = "1"
-			event.Duration = 121
-			event.Timestamp = time.Now().Unix();
+			event.UserID = val;
 			events = append(events, event)
 		}
 		c.JSON(200, events)
 	}
 }
 
-// GetResponseTimes get response times form Cassandra
+// GetResponseTimes get response times
 func GetResponseTimes() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var responses []Response
@@ -84,6 +73,13 @@ func Save(apiKey string) {
 	log.Info("Saving key : ", currentTime+"_test")
 }
 
+func SaveVisitors(visitor IncomingRequest) {
+	currentTime := time.Now().Format(time.RFC850);
+	//strconv.FormatInt(time.Now().UnixNano(), 10)
+	log.Info("Time", currentTime)
+	redisCli.Set(currentTime, visitor.Ip, 0);
+}
+
 func SaveEvents(apiKey string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		log.Info(c)
@@ -93,15 +89,11 @@ func SaveEvents(apiKey string) gin.HandlerFunc {
 
 func SaveIncomingRequest() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		type IncomingRequest struct {
-			Visitor       string `form:"visitor" 		json:"visitor" 			binding:"required"`
-			Ip            string `form:"ip" 		json:"ip" 			binding:"required"`
-		}
 		var json IncomingRequest
 		if c.Bind(&json) == nil {
-			go Save(json.Ip)
+			go SaveVisitors(json)
 		} else {
-			c.String(400, "failedd")
+			c.String(400, "failed")
 		}
 	}
 }
