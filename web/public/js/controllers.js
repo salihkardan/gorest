@@ -16,10 +16,18 @@ app.controller("RequestController", function($scope, $http) {
 });
 
 app.controller("HomeController", function($scope, $http) {
-    $http.post("/incoming", {
-		ip: window.location.host
-    }).then(function success(resp) {
-        console.log( resp.data )
+    var json = 'http://ipv4.myexternalip.com/json';
+    var clinetIp;
+    $http.get(json).then(function(result) {
+        clinetIp = result.data.ip
+		console.log(clinetIp)
+        $http.post("/incoming", {
+            ip: clinetIp
+        }).then(function success(resp) {
+            console.log( resp.data )
+        });
+    }, function(e) {
+        alert("error");
     });
 });
 
