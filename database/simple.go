@@ -16,6 +16,8 @@ type Event struct {
 
 type IncomingRequest struct {
 	Ip            string `form:"ip" json:"ip" binding:"required"`
+	Country       string `form:"country" json:"country" binding:"required"`
+	City          string `form:"city" json:"city" binding:"required"`
 }
 
 // Response struct to bind objects
@@ -44,6 +46,7 @@ func GetEvents() gin.HandlerFunc {
 			event.APIKey = keys[i];
 			event.UserID = val;
 			events = append(events, event)
+			log.Info(event)
 		}
 		c.JSON(200, events)
 	}
@@ -77,7 +80,9 @@ func SaveVisitors(visitor IncomingRequest) {
 	currentTime := time.Now().Format(time.RFC850);
 	//strconv.FormatInt(time.Now().UnixNano(), 10)
 	log.Info("Time", currentTime)
-	redisCli.Set(currentTime, visitor.Ip, 0);
+	log.Info(visitor)
+	s := visitor.Ip + " " + visitor.City + " " + visitor.Country
+	redisCli.Set(currentTime, s, 0);
 }
 
 func SaveEvents(apiKey string) gin.HandlerFunc {
