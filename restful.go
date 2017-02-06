@@ -59,7 +59,7 @@ func TokenAuthMiddleware(apiKeyMap map[string]bool) gin.HandlerFunc {
 func main() {
 	apiKeyMap := loadAPIKeys()
 
-	port := 80
+	port := 8080
 	StaticFiles := "./web"
 
 	r := gin.New()
