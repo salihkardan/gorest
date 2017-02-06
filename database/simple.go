@@ -10,14 +10,14 @@ import (
 
 // Event struct to bind objects
 type Event struct {
-	APIKey    string `form:"apiKey" json:"apiKey" binding:"required"`
-	UserID    string `form:"userID" json:"userID" binding:"required"`
+	APIKey string `form:"apiKey" json:"apiKey" binding:"required"`
+	UserID string `form:"userID" json:"userID" binding:"required"`
 }
 
 type IncomingRequest struct {
-	Ip            string `form:"ip" json:"ip" binding:"required"`
-	Country       string `form:"country" json:"country" binding:"required"`
-	City          string `form:"city" json:"city" binding:"required"`
+	Ip      string `form:"ip" json:"ip" binding:"required"`
+	Country string `form:"country" json:"country" binding:"required"`
+	City    string `form:"city" json:"city" binding:"required"`
 }
 
 // Response struct to bind objects
@@ -38,18 +38,23 @@ var redisCli = redis.NewClient(&redis.Options{
 // GetEvents get evetns form Cassandra
 func GetEvents() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var events []Event
-		var event Event
-		keys := redisCli.Keys("*").Val();
-		for i := 0; i < len(keys); i++ {
-			val := redisCli.Get(keys[i]).Val();
-			event.APIKey = keys[i];
-			event.UserID = val;
-			events = append(events, event)
-			log.Info(event)
-		}
+		events := listEvents();
 		c.JSON(200, events)
 	}
+}
+
+func listEvents() []Event{
+	var events []Event
+	var event Event
+	keys := redisCli.Keys("*").Val();
+	for i := 0; i < len(keys); i++ {
+		val := redisCli.Get(keys[i]).Val();
+		event.APIKey = keys[i];
+		event.UserID = val;
+		events = append(events, event)
+		log.Info(event)
+	}
+	return events;
 }
 
 // GetResponseTimes get response times
@@ -102,4 +107,3 @@ func SaveIncomingRequest() gin.HandlerFunc {
 		}
 	}
 }
-

@@ -5,13 +5,14 @@ import (
 	"io/ioutil"
 	"log"
 	"path"
-	"strconv"
+	//"strconv"
 	"strings"
 
 	"github.com/salihkardan/gorest/database"
 	jade "github.com/salihkardan/gorest/jade"
 
 	"github.com/gin-gonic/gin"
+	"strconv"
 )
 
 //loadApiKeys load api keys to memory
@@ -54,6 +55,10 @@ func TokenAuthMiddleware(apiKeyMap map[string]bool) gin.HandlerFunc {
 			RespondWithError(400, "Wrong request... Missing data in request", c)
 		}
 	}
+}
+
+func Sum(x, y int) int {
+	return x + y
 }
 
 func main() {

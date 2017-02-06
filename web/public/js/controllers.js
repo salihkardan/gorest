@@ -15,7 +15,7 @@ app.controller("RequestController", function ($scope, $http) {
     });
 });
 
-app.controller("HomeController", function ($scope, $http) {
+app.controller("HomeController", function ($scope, $http, $location) {
     $http.get('http://ipinfo.io/json').success(
         function (data) {
             $http.post("/incoming", {
@@ -26,6 +26,7 @@ app.controller("HomeController", function ($scope, $http) {
                 console.log(resp.data)
             });
         });
+    $location.html5Mode(true)
 });
 
 

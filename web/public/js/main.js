@@ -63,7 +63,8 @@ app.run(function($rootScope, $location, $state) {
 		delete localStorage.token;
 		$rootScope.token = null;
 		$state.go("home");
-	}
+	};
+
 
 	$rootScope.$on('$stateChangeStart',
 		function(event, toState, toParams, fromState, fromParams) {

@@ -1,5 +1,5 @@
-hash: f5697e31ac05c9cf0d779b42aa68435650fedc2746de7b9171f09234cef3a796
-updated: 2017-02-03T16:44:29.746664725+03:00
+hash: 75081b4cfe36452bd5453a1eafb3bdbfccbea6682a3c8e40f97f570fe2ddd4b2
+updated: 2017-02-06T22:29:54.199365578+03:00
 imports:
 - name: github.com/gin-gonic/gin
   version: f931d1ea80ae95a6fc739213cdd9399bd2967fb6
@@ -16,14 +16,20 @@ imports:
   version: db4d7e4f68708c5020c392b380e3565df2132840
 - name: github.com/manucorporat/sse
   version: ee05b128a739a0fb76c7ebd3ae4810c1de808d6d
-- name: golang.org/x/net
-  version: f315505cf3349909cdf013ea56690da34e96a451
-  subpackages:
-  - context
+- name: github.com/op/go-logging
+  version: 970db520ece77730c7e4724c61121037378659d9
+- name: golang.org/x/net/context
+  version: ""
 - name: gopkg.in/go-playground/validator.v8
   version: c193cecd124b5cc722d7ee5538e945bdb3348435
-- name: gopkg.in/redis.v4
-  version: eca5d02f24a99706525f77f544deee8e7894f26c
+- name: gopkg.in/redis.v5
+  version: 9cd49656897843b8f2bf3d9639230cb7aec90d6c
+  subpackages:
+  - internal
+  - internal/consistenthash
+  - internal/hashtag
+  - internal/pool
+  - internal/proto
 - name: gopkg.in/yaml.v2
   version: a83829b6f1293c91addabc89d0571c246397bbf4
 devImports: []
