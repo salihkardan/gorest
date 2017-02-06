@@ -1,6 +1,6 @@
 html
 	head
-		title GO TEST
+		title Salih Kardan
 		meta(http-equiv="Content-Type",content="text/html; charset=utf-8")
 
 		// Style files
@@ -42,22 +42,5 @@ html
 		script(src="/js/directives.js")
 
 	body(ng-app="MyApp")
-		nav.navbar.navbar-inverse
-			.container
-				.navbar-header
-					a.navbar-brand(href="#/home")
-						b Hello :)
-				ul.nav.navbar-nav
-					li
-						a(href="#/events")
-							i.fa.fa-cloud
-							b  Events
-					li
-						a(href="#/monitor")
-							i.fa.fa-eye
-							b Monitor	
-					li
-						a(href="#/requests")
-							i.fa.fa-eye
-							b Requests					
+
 		#content(ui-view="")

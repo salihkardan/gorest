@@ -20,7 +20,7 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $logProvi
 	 });
 
 	// Routes and states
-	$urlRouterProvider.otherwise("/events");
+	$urlRouterProvider.otherwise("/home");
 	$stateProvider
 		.state('home', {
 			url: "/home",
@@ -41,7 +41,7 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $logProvi
 			url: "/monitor",
 			templateUrl: "partials/monitor.html",
 			controller: "MonitorController",
-		})
+		});
 	// HTTP Interceptor for config
 	$httpProvider.interceptors.push('APIInterceptor');
 });
@@ -62,7 +62,7 @@ app.run(function($rootScope, $location, $state) {
 		// TODO: Remove Token
 		delete localStorage.token;
 		$rootScope.token = null;
-		$state.go("events");
+		$state.go("home");
 	}
 
 	$rootScope.$on('$stateChangeStart',
@@ -71,7 +71,7 @@ app.run(function($rootScope, $location, $state) {
       var whitelist  = ["signup", "login"];
 			if (!$rootScope.token) {
 				if ( !whitelist.indexOf(toState)){
-					$state.go("events")
+					$state.go("home")
 					event.preventDefault();
 				}
 			}
