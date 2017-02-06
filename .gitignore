@@ -1,2 +1,4 @@
 restful
 .idea
+logs/
+glide.lock

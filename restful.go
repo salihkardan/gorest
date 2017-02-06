@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/salihkardan/gorest/database"
-	jade "github.com/salihkardan/gorest/jade"
+	"github.com/salihkardan/gorest/jade"
 
 	"github.com/gin-gonic/gin"
 	"strconv"
@@ -32,7 +32,7 @@ func loadAPIKeys() map[string]bool {
 //RespondWithError resonses.
 func RespondWithError(code int, message string, c *gin.Context) {
 	resp := map[string]string{"error": message}
-
+	fmt.Print("Adfadf")
 	c.JSON(code, resp)
 	c.Abort()
 }
