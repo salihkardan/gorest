@@ -38,12 +38,12 @@ var redisCli = redis.NewClient(&redis.Options{
 // GetEvents get evetns form Cassandra
 func GetEvents() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		events := listEvents();
+		events := ListEvents();
 		c.JSON(200, events)
 	}
 }
 
-func listEvents() []Event{
+func ListEvents() []Event{
 	var events []Event
 	var event Event
 	keys := redisCli.Keys("*").Val();

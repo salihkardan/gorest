@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"log"
 	"path"
-	//"strconv"
 	"strings"
 
 	"github.com/salihkardan/gorest/database"
