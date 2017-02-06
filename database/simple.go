@@ -2,10 +2,10 @@ package database
 
 import (
 	"github.com/gin-gonic/gin"
-	"gopkg.in/redis.v5"
 	"github.com/op/go-logging"
-	"time"
+	"gopkg.in/redis.v5"
 	"strconv"
+	"time"
 )
 
 // Event struct to bind objects
@@ -38,23 +38,23 @@ var redisCli = redis.NewClient(&redis.Options{
 // GetEvents get evetns form Cassandra
 func GetEvents() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		events := ListEvents();
+		events := ListEvents()
 		c.JSON(200, events)
 	}
 }
 
-func ListEvents() []Event{
+func ListEvents() []Event {
 	var events []Event
 	var event Event
-	keys := redisCli.Keys("*").Val();
+	keys := redisCli.Keys("*").Val()
 	for i := 0; i < len(keys); i++ {
-		val := redisCli.Get(keys[i]).Val();
-		event.APIKey = keys[i];
-		event.UserID = val;
+		val := redisCli.Get(keys[i]).Val()
+		event.APIKey = keys[i]
+		event.UserID = val
 		events = append(events, event)
 		log.Info(event)
 	}
-	return events;
+	return events
 }
 
 // GetResponseTimes get response times
@@ -77,17 +77,17 @@ func Save(apiKey string) {
 	currentTime := strconv.FormatInt(time.Now().UnixNano(), 10)
 	log.Info("Time", currentTime)
 	log.Info("ApiKey", apiKey)
-	redisCli.Set(currentTime+"_"+apiKey, apiKey, 0);
+	redisCli.Set(currentTime+"_"+apiKey, apiKey, 0)
 	log.Info("Saving key : ", currentTime+"_test")
 }
 
 func SaveVisitors(visitor IncomingRequest) {
-	currentTime := time.Now().Format(time.RFC850);
+	currentTime := time.Now().Format(time.RFC850)
 	//strconv.FormatInt(time.Now().UnixNano(), 10)
 	log.Info("Time", currentTime)
 	log.Info(visitor)
 	s := visitor.Ip + " " + visitor.City + " " + visitor.Country
-	redisCli.Set(currentTime, s, 0);
+	redisCli.Set(currentTime, s, 0)
 }
 
 func SaveEvents(apiKey string) gin.HandlerFunc {
