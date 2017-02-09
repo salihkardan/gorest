@@ -26,7 +26,6 @@ app.controller("HomeController", function ($scope, $http, $location) {
                 console.log(resp.data)
             });
         });
-    $location.html5Mode(true)
 });
 
 

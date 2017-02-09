@@ -1,46 +1,41 @@
 html
-	head
-		title Salih Kardan
-		meta(http-equiv="Content-Type",content="text/html; charset=utf-8")
+  head
+    title Salih Kardan — Software Engineer
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    // Style files
+    link(rel='stylesheet', href='/css/theme.css')
+    // Font awesome for icons
+    link(rel='stylesheet', href='/vendor/font-awesome.css')
+    link(rel='stylesheet', href='/css/angular-chart.css')
+    // The angular dependencies
+    script(src='/vendor/angular.min.js')
+    // Rickshaw - Time series Plots
+    link(href='/vendor/rickshaw/rickshaw.css', rel='stylesheet')
+    script(src='/vendor/d3.js')
+    script(src='/vendor/rickshaw/rickshaw.js')
+    script(src='/vendor/rickshaw/angular-rickshaw.js')
+    // UI Router
+    script(src='/vendor/angular-ui-router.js')
+    // UI Bootstrap
+    script(src='/vendor/angular-bootstrap/ui-bootstrap-tpls.js')
+    script(src='/vendor/plotly-latest.min.js')
+    script(src='/vendor/angular-plotly.js')
+    script(src='/vendor/Chart.min.js')
+    script(src='/vendor/angular-chart.min.js')
+    script(src='/vendor/tc-angular-chartjs.min.js')
+    // Application Entry point
+    script(src='/js/main.js')
+    // Controllers, Directives: TODO: Seperate them
+    script(src='/js/controllers.js')
+    script(src='/js/directives.js')
+    
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-91650591-1', 'auto');
+      ga('send', 'pageview');
 
-		// Style files
-		link(rel="stylesheet",href="/css/theme.css")
-
-		// Font awesome for icons
-		link(rel="stylesheet",href="/vendor/font-awesome.css")
-		link(rel="stylesheet",href="/css/angular-chart.css")
-
-		// The angular dependencies
-		script(src="/vendor/angular.min.js")
-	
-		// Rickshaw - Time series Plots
-		link(href="/vendor/rickshaw/rickshaw.css",rel="stylesheet")
-		script(src="/vendor/d3.js")
-		script(src="/vendor/rickshaw/rickshaw.js")
-		script(src="/vendor/rickshaw/angular-rickshaw.js")
-
-		// UI Router
-		script(src="/vendor/angular-ui-router.js")
-
-		// UI Bootstrap
-		//- script(src="/vendor/angular-bootstrap/ui-bootstrap.js")
-		script(src="/vendor/angular-bootstrap/ui-bootstrap-tpls.js")
-
-		script(src="/vendor/plotly-latest.min.js")
-		script(src="/vendor/angular-plotly.js")
-		
-		script(src="/vendor/Chart.min.js")
-		script(src="/vendor/angular-chart.min.js")
-		script(src="/vendor/tc-angular-chartjs.min.js")
-		
-
-		// Application Entry point
-		script(src="/js/main.js")
-
-		// Controllers, Directives: TODO: Seperate them
-		script(src="/js/controllers.js")
-		script(src="/js/directives.js")
-
-	body(ng-app="MyApp")
-
-		#content(ui-view="")
+  body(ng-app='MyApp')
+    #content(ui-view='')
