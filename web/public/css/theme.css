@@ -1077,7 +1077,7 @@ body {
   font-size: 13px;
   line-height: 1.7em;
   color: #58666e;
-  background-color: #e5e5e5;
+  background-color: #ffffff;
 }
 input,
 button,
@@ -1576,6 +1576,7 @@ pre code {
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
+  background-color: #0e0f10;
 }
 @media (min-width: 768px) {
   .container {
