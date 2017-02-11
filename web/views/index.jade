@@ -3,8 +3,14 @@ html
     title Salih Kardan — Software Engineer
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
 
-    // Style files
-    link(rel='stylesheet', href='/css/theme.css')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    script(src='/js/html5shiv.js')
+    script(src='/js/respond.min.js')
+
+    link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet', href='/css/noscript.css')
+
 
     // Font awesome for icons
     link(rel='stylesheet', href='/vendor/font-awesome.css')
@@ -45,5 +51,5 @@ html
       ga('create', 'UA-91650591-1', 'auto');
       ga('send', 'pageview');
 
-  body(ng-app='MyApp' class="text-center")
+  body(ng-app='MyApp' class="is-loading")
     #content(ui-view='')

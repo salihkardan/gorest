@@ -1,10 +1,28 @@
-h1(style='color: #5e9ca0;') Salih Kardan
-p  Will build a cool site if I have time :)
-ol(style='list-style: none; font-size: 14px; line-height: 32px; font-weight: bold;')
+#wrapper
+  // Main
+  section#main
+    header
+      span.avatar
+        img(src='/images/cutmypic.png', alt='')
+      h1 Salih Kardan
+      p Software Engineer @
+        a(href='https://opsgenie.com')
+            font(color='orange') OpsGenie
 
-  a(href='https://twitter.com/sadiges')
-    img(src='/images/twitter.png', alt='W3Schools', width='30', height='30', border='0')
+    footer
+      ul.icons
+        li
+          a.fa-twitter(href='https://twitter.com/sadiges') Twitter
+        li
+          a.fa-linkedin(href='https://tr.linkedin.com/in/salihkardan') Linkedin
 
-  a(href='https://tr.linkedin.com/in/salihkardan')
-    img(src='/images/linkedin.png', alt='W3Schools', width='30', height='30', border='0')
-  p             
+  footer#footer
+    ul.copyright
+      li © Salih Kardan
+
+  script.
+    if ('addEventListener' in window) {
+    window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\\bis-loading\b/, ''); });
+    document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\\.0)/) ? ' is-ie' : '');
+    }
+
